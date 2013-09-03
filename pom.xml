@@ -11,15 +11,18 @@
     <description>Ouobpo Bibliotheca Management Tool</description>
     <url>http://code.google.com/p/ouobpo</url>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <build>
         <finalName>baobab</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                    <encoding>UTF-8</encoding>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
             <plugin>
