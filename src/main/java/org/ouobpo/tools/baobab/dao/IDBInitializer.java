@@ -6,8 +6,8 @@ package org.ouobpo.tools.baobab.dao;
  * @author tadayosi
  */
 public interface IDBInitializer {
-  /**
-   * initializes table and sequence of book.
-   */
-  public void initBook();
+    /**
+     * initializes table and sequence of book.
+     */
+    public void initBook();
 }

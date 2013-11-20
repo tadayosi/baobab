@@ -11,37 +11,37 @@ import org.ouobpo.tools.baobab.domain.Book;
  */
 public interface IBookDao {
 
-  static final Class<?> BEAN = Book.class;
+    static final Class<?> BEAN = Book.class;
 
-  void insert(Book book);
+    void insert(Book book);
 
-  void update(Book book);
+    void update(Book book);
 
-  void delete(Book book);
+    void delete(Book book);
 
-  long count();
+    long count();
 
-  int oldestYear();
+    int oldestYear();
 
-  List<Book> getAllBooks();
+    List<Book> getAllBooks();
 
-  static final String getBook_ARGS = "id";
+    static final String getBook_ARGS = "id";
 
-  Book getBook(long id);
+    Book getBook(long id);
 
-  static final String getBooksByTitle_ARGS = "title";
+    static final String getBooksByTitle_ARGS = "title";
 
-  List<Book> getBooksByTitle(String title);
+    List<Book> getBooksByTitle(String title);
 
-  static final String getBooksByYear_ARGS = "year";
+    static final String getBooksByYear_ARGS = "year";
 
-  List<Book> getBooksByYear(int year);
+    List<Book> getBooksByYear(int year);
 
-  static final String getBooksByYearPagerCondition_ARGS = "cond";
+    static final String getBooksByYearPagerCondition_ARGS = "cond";
 
-  List<Book> getBooksByYearPagerCondition(YearPagerCondition cond);
+    List<Book> getBooksByYearPagerCondition(YearPagerCondition cond);
 
-  static final String searchBooksByWord_ARGS = "word";
+    static final String searchBooksByWord_ARGS = "word";
 
-  List<Book> searchBooksByWord(String word);
+    List<Book> searchBooksByWord(String word);
 }

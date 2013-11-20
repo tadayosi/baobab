@@ -15,61 +15,61 @@ import org.ouobpo.tools.baobab.domain.Book;
  * @author tadayosi
  */
 public class SearchAction extends ActionBase {
-  private static final Log   LOG = LogFactory.getLog(SearchAction.class);
+    private static final Log LOG = LogFactory.getLog(SearchAction.class);
 
-  private String             fWord;
-  private List<Book>         fBooks;
+    private String fWord;
+    private List<Book> fBooks;
 
-  /** session managed. */
-  private YearPagerCondition fYearCondition;
+    /** session managed. */
+    private YearPagerCondition fYearCondition;
 
-  //-----------------------------------------------------------------------------------------------
-  // Actions
-  //-----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    // Actions
+    //----------------------------------------------------------------------------------------------
 
-  public String initialize() {
-    // invalid
-    if (StringUtils.isEmpty(fWord)) {
-      FacesUtils.error("検索語を入力してください");
-      fBooks = new ArrayList<Book>();
+    public String initialize() {
+        // invalid
+        if (StringUtils.isEmpty(fWord)) {
+            FacesUtils.error("検索語を入力してください");
+            fBooks = new ArrayList<Book>();
+        }
+        // valid
+        else {
+            fBooks = fBookDao.searchBooksByWord("%" + fWord.trim() + "%");
+            FacesUtils.info(fBooks.size() + " 件の書籍が該当しました");
+            // *** DEBUG LOG ***
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("word=\"" + fWord + "\" : " + fBooks.size() + " books.");
+            }
+        }
+
+        // updates count on the menu part.
+        fYearCondition.setCount(fBooks.size());
+
+        return null;
     }
-    // valid
-    else {
-      fBooks = fBookDao.searchBooksByWord("%" + fWord.trim() + "%");
-      FacesUtils.info(fBooks.size() + " 件の書籍が該当しました");
-      // *** DEBUG LOG ***
-      if (LOG.isDebugEnabled()) {
-        LOG.debug("word=\"" + fWord + "\" : " + fBooks.size() + " books.");
-      }
+
+    //----------------------------------------------------------------------------------------------
+    // Getters
+    //----------------------------------------------------------------------------------------------
+
+    public String getWord() {
+        return fWord;
     }
 
-    // updates count on the menu part.
-    fYearCondition.setCount(fBooks.size());
+    public List<Book> getBooks() {
+        return fBooks;
+    }
 
-    return null;
-  }
+    //----------------------------------------------------------------------------------------------
+    // Setters
+    //----------------------------------------------------------------------------------------------
 
-  //-----------------------------------------------------------------------------------------------
-  // Getters
-  //-----------------------------------------------------------------------------------------------
+    public void setWord(String title) {
+        fWord = title;
+    }
 
-  public String getWord() {
-    return fWord;
-  }
-
-  public List<Book> getBooks() {
-    return fBooks;
-  }
-
-  //-----------------------------------------------------------------------------------------------
-  // Setters
-  //-----------------------------------------------------------------------------------------------
-
-  public void setWord(String title) {
-    fWord = title;
-  }
-
-  public void setYearCondition(YearPagerCondition condition) {
-    fYearCondition = condition;
-  }
+    public void setYearCondition(YearPagerCondition condition) {
+        fYearCondition = condition;
+    }
 }

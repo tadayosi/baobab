@@ -18,24 +18,24 @@ import org.ouobpo.tools.baobab.dao.IDBInitializer;
  * @author tadayosi
  */
 public class Application {
-  private static final Log LOG = LogFactory.getLog(Application.class);
+    private static final Log LOG = LogFactory.getLog(Application.class);
 
-  /**
-   * initializes DB on startup if DB is not yet initialized.
-   */
-  public Application(IBookDao bookDao, IDBInitializer initializer) {
-    try {
-      // checks if DB has a table already.
-      bookDao.count();
-    } catch (Exception e) {
-      if (LOG.isInfoEnabled()) {
-        LOG.info("initializes DB now.");
-      }
-      initializer.initBook();
+    /**
+     * initializes DB on startup if DB is not yet initialized.
+     */
+    public Application(IBookDao bookDao, IDBInitializer initializer) {
+        try {
+            // checks if DB has a table already.
+            bookDao.count();
+        } catch (Exception e) {
+            if (LOG.isInfoEnabled()) {
+                LOG.info("initializes DB now.");
+            }
+            initializer.initBook();
+        }
     }
-  }
 
-  public String getApplicationTitle() {
-    return "蔵書管理ツールBaobab v" + Constants.VERSION;
-  }
+    public String getApplicationTitle() {
+        return "蔵書管理ツールBaobab v" + Constants.VERSION;
+    }
 }

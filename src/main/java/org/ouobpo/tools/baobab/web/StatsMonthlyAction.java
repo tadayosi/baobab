@@ -14,44 +14,44 @@ import org.ouobpo.tools.baobab.domain.MonthlyStatisticsTable;
  * @author tadayosi
  */
 public class StatsMonthlyAction extends ActionBase {
-  private static final Log             LOG = LogFactory.getLog(StatsMonthlyAction.class);
+    private static final Log LOG = LogFactory.getLog(StatsMonthlyAction.class);
 
-  /** statistics tables. */
-  private List<MonthlyStatisticsTable> fMonthlyStatisticsTables;
+    /** statistics tables. */
+    private List<MonthlyStatisticsTable> fMonthlyStatisticsTables;
 
-  public StatsMonthlyAction() {
-    fMonthlyStatisticsTables = new ArrayList<MonthlyStatisticsTable>();
+    public StatsMonthlyAction() {
+        fMonthlyStatisticsTables = new ArrayList<MonthlyStatisticsTable>();
 
-  }
-
-  //-----------------------------------------------------------------------------------------------
-  // Actions
-  //-----------------------------------------------------------------------------------------------
-
-  public String initialize() {
-    // reads statistics.
-    List<MonthlyStatistics> allStats = fMonthlyStatisticsDao.getAllMonthlyStatistics();
-    // *** DEBUG LOG ***
-    if (LOG.isDebugEnabled()) {
-      LOG.debug("size of monthly statistics: " + allStats.size());
     }
 
-    // initializes tables.
-    fMonthlyStatisticsTables = MonthlyStatisticsTable.createTables(allStats);
+    //----------------------------------------------------------------------------------------------
+    // Actions
+    //----------------------------------------------------------------------------------------------
 
-    return null;
-  }
+    public String initialize() {
+        // reads statistics.
+        List<MonthlyStatistics> allStats = fMonthlyStatisticsDao.getAllMonthlyStatistics();
+        // *** DEBUG LOG ***
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("size of monthly statistics: " + allStats.size());
+        }
 
-  //-----------------------------------------------------------------------------------------------
-  // Getters
-  //-----------------------------------------------------------------------------------------------
+        // initializes tables.
+        fMonthlyStatisticsTables = MonthlyStatisticsTable.createTables(allStats);
 
-  public List<MonthlyStatisticsTable> getTables() {
-    return fMonthlyStatisticsTables;
-  }
+        return null;
+    }
 
-  //-----------------------------------------------------------------------------------------------
-  // Setters
-  //-----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    // Getters
+    //----------------------------------------------------------------------------------------------
+
+    public List<MonthlyStatisticsTable> getTables() {
+        return fMonthlyStatisticsTables;
+    }
+
+    //----------------------------------------------------------------------------------------------
+    // Setters
+    //----------------------------------------------------------------------------------------------
 
 }

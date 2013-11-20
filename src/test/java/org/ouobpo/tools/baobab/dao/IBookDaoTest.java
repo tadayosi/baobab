@@ -13,41 +13,34 @@ import org.seasar.framework.container.factory.S2ContainerFactory;
 
 public class IBookDaoTest {
 
-  @Test
-  public void simpleCRUD() {
-    S2Container container = S2ContainerFactory.create("org/ouobpo/tools/baobab/baobab.dicon");
-    container.init();
-    IBookDao dao = (IBookDao) container.getComponent(IBookDao.class);
+    @Test
+    public void simpleCRUD() {
+        S2Container container = S2ContainerFactory.create("org/ouobpo/tools/baobab/baobab.dicon");
+        container.init();
+        IBookDao dao = (IBookDao) container.getComponent(IBookDao.class);
 
-    // create & read test
-    Book newBook = new Book(
-        -1,
-        "デザインパターン",
-        "Gang of Four",
-        "Addison-Wesley",
-        new Date(),
-        12345,
-        "メモ");
-    dao.insert(newBook);
-    List<Book> createds = dao.getBooksByTitle("デザインパターン");
-    assertTrue(createds.size() > 0);
-    Book created = (Book) createds.get(0);
-    assertNotNull(created);
-    assertEquals("Gang of Four", created.getAuthors());
-    assertEquals(12345, created.getPrice());
+        // create & read test
+        Book newBook = new Book(-1, "デザインパターン", "Gang of Four", "Addison-Wesley", new Date(), 12345, "メモ");
+        dao.insert(newBook);
+        List<Book> createds = dao.getBooksByTitle("デザインパターン");
+        assertTrue(createds.size() > 0);
+        Book created = (Book) createds.get(0);
+        assertNotNull(created);
+        assertEquals("Gang of Four", created.getAuthors());
+        assertEquals(12345, created.getPrice());
 
-    // update test
-    created.setAuthors("Gamma, Helm, Johnson, Vlissides");
-    created.setPrice(6789);
-    dao.update(created);
-    Book updated = dao.getBook(created.getId());
-    assertEquals("Gamma, Helm, Johnson, Vlissides", updated.getAuthors());
-    assertEquals(6789, updated.getPrice());
+        // update test
+        created.setAuthors("Gamma, Helm, Johnson, Vlissides");
+        created.setPrice(6789);
+        dao.update(created);
+        Book updated = dao.getBook(created.getId());
+        assertEquals("Gamma, Helm, Johnson, Vlissides", updated.getAuthors());
+        assertEquals(6789, updated.getPrice());
 
-    // delete test
-    dao.delete(created);
-    assertNull(dao.getBook(created.getId()));
+        // delete test
+        dao.delete(created);
+        assertNull(dao.getBook(created.getId()));
 
-    container.destroy();
-  }
+        container.destroy();
+    }
 }

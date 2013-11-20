@@ -13,132 +13,125 @@ import org.ouobpo.tools.baobab.domain.Book;
  * @author tadayosi
  */
 public class RegisterAction extends ActionBase {
-  private static final Log LOG   = LogFactory.getLog(RegisterAction.class);
+    private static final Log LOG = LogFactory.getLog(RegisterAction.class);
 
-  private String           fTitle;
-  private String           fAuthors;
-  private String           fPublisher;
-  private Date             fDate = new Date();
-  private int              fPrice;
-  private String           fNote;
+    private String fTitle;
+    private String fAuthors;
+    private String fPublisher;
+    private Date fDate = new Date();
+    private int fPrice;
+    private String fNote;
 
-  //-----------------------------------------------------------------------------------------------
-  // Actions
-  //-----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    // Actions
+    //----------------------------------------------------------------------------------------------
 
-  public String register() {
-    if (!validate()) {
-      // registration failed.
-      if (LOG.isDebugEnabled()) {
-        LOG.debug("book registration failed");
-      }
-      FacesUtils.error("書籍情報に誤りがあるため、登録できません");
-      return "failure";
+    public String register() {
+        if (!validate()) {
+            // registration failed.
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("book registration failed");
+            }
+            FacesUtils.error("書籍情報に誤りがあるため、登録できません");
+            return "failure";
+        }
+
+        // pursues registration.
+        Book newBook = new Book(-1, fTitle, fAuthors, fPublisher, fDate, fPrice, fNote);
+        fBookDao.insert(newBook);
+        if (LOG.isInfoEnabled()) {
+            LOG.info("a book is registered: " + newBook);
+        }
+        FacesUtils.info("書籍情報を登録しました");
+
+        // clear params.
+        clear();
+
+        return "success";
     }
 
-    // pursues registration.
-    Book newBook = new Book(
-        -1,
-        fTitle,
-        fAuthors,
-        fPublisher,
-        fDate,
-        fPrice,
-        fNote);
-    fBookDao.insert(newBook);
-    if (LOG.isInfoEnabled()) {
-      LOG.info("a book is registered: " + newBook);
+    private boolean validate() {
+        boolean valid = true;
+        if (StringUtils.isEmpty(fTitle)) {
+            valid = false;
+        }
+        if (StringUtils.isEmpty(fAuthors)) {
+            valid = false;
+        }
+        if (StringUtils.isEmpty(fPublisher)) {
+            valid = false;
+        }
+        if (fDate == null) {
+            valid = false;
+        }
+        if (fPrice < 0) {
+            valid = false;
+        }
+        return valid;
     }
-    FacesUtils.info("書籍情報を登録しました");
 
-    // clear params.
-    clear();
-
-    return "success";
-  }
-
-  private boolean validate() {
-    boolean valid = true;
-    if (StringUtils.isEmpty(fTitle)) {
-      valid = false;
+    private void clear() {
+        fDate = new Date();
+        fTitle = "";
+        fAuthors = "";
+        fPublisher = "";
+        fPrice = 0;
+        fNote = "";
     }
-    if (StringUtils.isEmpty(fAuthors)) {
-      valid = false;
+
+    //----------------------------------------------------------------------------------------------
+    // Getters
+    //----------------------------------------------------------------------------------------------
+
+    public String getTitle() {
+        return fTitle;
     }
-    if (StringUtils.isEmpty(fPublisher)) {
-      valid = false;
+
+    public String getAuthors() {
+        return fAuthors;
     }
-    if (fDate == null) {
-      valid = false;
+
+    public String getPublisher() {
+        return fPublisher;
     }
-    if (fPrice < 0) {
-      valid = false;
+
+    public Date getDate() {
+        return fDate;
     }
-    return valid;
-  }
 
-  private void clear() {
-    fDate = new Date();
-    fTitle = "";
-    fAuthors = "";
-    fPublisher = "";
-    fPrice = 0;
-    fNote = "";
-  }
+    public int getPrice() {
+        return fPrice;
+    }
 
-  //-----------------------------------------------------------------------------------------------
-  // Getters
-  //-----------------------------------------------------------------------------------------------
+    public String getNote() {
+        return fNote;
+    }
 
-  public String getTitle() {
-    return fTitle;
-  }
+    //----------------------------------------------------------------------------------------------
+    // Setters
+    //----------------------------------------------------------------------------------------------
 
-  public String getAuthors() {
-    return fAuthors;
-  }
+    public void setTitle(String title) {
+        fTitle = title;
+    }
 
-  public String getPublisher() {
-    return fPublisher;
-  }
+    public void setAuthors(String authors) {
+        fAuthors = authors;
+    }
 
-  public Date getDate() {
-    return fDate;
-  }
+    public void setPublisher(String publisher) {
+        fPublisher = publisher;
+    }
 
-  public int getPrice() {
-    return fPrice;
-  }
+    public void setDate(Date date) {
+        fDate = date;
+    }
 
-  public String getNote() {
-    return fNote;
-  }
+    public void setPrice(int price) {
+        fPrice = price;
+    }
 
-  //-----------------------------------------------------------------------------------------------
-  // Setters
-  //-----------------------------------------------------------------------------------------------
-
-  public void setTitle(String title) {
-    fTitle = title;
-  }
-
-  public void setAuthors(String authors) {
-    fAuthors = authors;
-  }
-
-  public void setPublisher(String publisher) {
-    fPublisher = publisher;
-  }
-
-  public void setDate(Date date) {
-    fDate = date;
-  }
-
-  public void setPrice(int price) {
-    fPrice = price;
-  }
-
-  public void setNote(String note) {
-    fNote = note;
-  }
+    public void setNote(String note) {
+        fNote = note;
+    }
 }

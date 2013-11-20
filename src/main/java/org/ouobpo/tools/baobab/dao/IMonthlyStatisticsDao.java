@@ -10,7 +10,7 @@ import org.ouobpo.tools.baobab.domain.MonthlyStatistics;
  * @author tadayosi
  */
 public interface IMonthlyStatisticsDao {
-  static final Class<?> BEAN = MonthlyStatistics.class;
+    static final Class<?> BEAN = MonthlyStatistics.class;
 
-  List<MonthlyStatistics> getAllMonthlyStatistics();
+    List<MonthlyStatistics> getAllMonthlyStatistics();
 }

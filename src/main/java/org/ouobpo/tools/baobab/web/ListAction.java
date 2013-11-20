@@ -15,63 +15,63 @@ import org.ouobpo.tools.baobab.domain.Book;
  * @author tadayosi
  */
 public class ListAction extends ActionBase {
-  private static final Log   LOG = LogFactory.getLog(ListAction.class);
+    private static final Log LOG = LogFactory.getLog(ListAction.class);
 
-  private YearPagerCondition fYearCondition;
-  private List<Book>         fBooks;
+    private YearPagerCondition fYearCondition;
+    private List<Book> fBooks;
 
-  //-----------------------------------------------------------------------------------------------
-  // Actions
-  //-----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    // Actions
+    //----------------------------------------------------------------------------------------------
 
-  public String initialize() {
-    fBooks = fBookDao.getBooksByYearPagerCondition(fYearCondition);
-    if (LOG.isDebugEnabled()) {
-      LOG.debug("total books number of the year: " + fYearCondition.getCount());
+    public String initialize() {
+        fBooks = fBookDao.getBooksByYearPagerCondition(fYearCondition);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("total books number of the year: " + fYearCondition.getCount());
+        }
+        return null;
     }
-    return null;
-  }
 
-  //-----------------------------------------------------------------------------------------------
-  // Getters
-  //-----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    // Getters
+    //----------------------------------------------------------------------------------------------
 
-  public long getCount() {
-    return fBookDao.count();
-  }
-
-  public List<Integer> getYears() {
-    int latest = Calendar.getInstance().get(Calendar.YEAR);
-    int oldest = fBookDao.oldestYear();
-    if (oldest == 0) {
-      oldest = latest;
+    public long getCount() {
+        return fBookDao.count();
     }
-    List<Integer> years = new ArrayList<Integer>();
-    for (int i = 0; latest - i >= oldest; i++) {
-      years.add(latest - i);
+
+    public List<Integer> getYears() {
+        int latest = Calendar.getInstance().get(Calendar.YEAR);
+        int oldest = fBookDao.oldestYear();
+        if (oldest == 0) {
+            oldest = latest;
+        }
+        List<Integer> years = new ArrayList<Integer>();
+        for (int i = 0; latest - i >= oldest; i++) {
+            years.add(latest - i);
+        }
+        return years;
     }
-    return years;
-  }
 
-  public List<Book> getBooks() {
-    return fBooks;
-  }
+    public List<Book> getBooks() {
+        return fBooks;
+    }
 
-  //-----------------------------------------------------------------------------------------------
-  // Setters
-  //-----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    // Setters
+    //----------------------------------------------------------------------------------------------
 
-  public void setYearCondition(YearPagerCondition cond) {
-    fYearCondition = cond;
-  }
+    public void setYearCondition(YearPagerCondition cond) {
+        fYearCondition = cond;
+    }
 
-  public void setYear(int year) {
-    fYearCondition.setYear(year);
-    // initialzes condition.
-    fYearCondition.setOffset(0);
-  }
+    public void setYear(int year) {
+        fYearCondition.setYear(year);
+        // initialzes condition.
+        fYearCondition.setOffset(0);
+    }
 
-  public void setOffset(int offset) {
-    fYearCondition.setOffset(offset);
-  }
+    public void setOffset(int offset) {
+        fYearCondition.setOffset(offset);
+    }
 }

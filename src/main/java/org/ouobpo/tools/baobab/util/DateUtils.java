@@ -10,11 +10,11 @@ import java.util.Date;
  * @author tadayosi
  */
 public class DateUtils {
-  /** do not instantiate this. */
-  private DateUtils() {}
+    /** do not instantiate this. */
+    private DateUtils() {}
 
-  public static String format(Date date) {
-    DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-    return format.format(date);
-  }
+    public static String format(Date date) {
+        DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        return format.format(date);
+    }
 }

@@ -10,14 +10,14 @@ import org.ouobpo.tools.baobab.dao.IMonthlyStatisticsDao;
  */
 public abstract class ActionBase {
 
-  protected IBookDao              fBookDao;
-  protected IMonthlyStatisticsDao fMonthlyStatisticsDao;
+    protected IBookDao fBookDao;
+    protected IMonthlyStatisticsDao fMonthlyStatisticsDao;
 
-  public void setBookDao(IBookDao bookDao) {
-    fBookDao = bookDao;
-  }
+    public void setBookDao(IBookDao bookDao) {
+        fBookDao = bookDao;
+    }
 
-  public void setMonthlyStatisticsDao(IMonthlyStatisticsDao monthlyStatisticsDao) {
-    fMonthlyStatisticsDao = monthlyStatisticsDao;
-  }
+    public void setMonthlyStatisticsDao(IMonthlyStatisticsDao monthlyStatisticsDao) {
+        fMonthlyStatisticsDao = monthlyStatisticsDao;
+    }
 }
